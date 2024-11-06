@@ -136,4 +136,4 @@ function rustyFmtInstance:__call(argTbl)
     return rustyFmt(argTbl, self.__fmtcfg)
 end
 
-return rustyFmtInstance
+return rustyFmtInstance:WithConfig{}
