@@ -1,3 +1,4 @@
+local failed = 0
 local function testErr(msg)
     io.stderr:write(msg .. "\n")
     io.stderr:flush()
@@ -10,7 +11,8 @@ local FailTestRustyFmt = RustyFmt:WithConfig{ error = failTestErr }
 
 local function test(testname, result, expected)
     if result ~= expected then
-        error("Test \"" .. testname .. "\" failed!\nExpected: " .. expected .. "\nGot: " .. result)
+        print("Test \"" .. testname .. "\" failed!\nExpected: " .. expected .. "\nGot: " .. result)
+        failed = failed + 1
     else
         print("Test \"" .. testname .. "\" passed!")
     end
@@ -19,7 +21,8 @@ end
 local function testForFail(testname, func)
     local success = pcall(func)
     if success == true then
-        error("Test \"" .. testname .. "\" failed!")
+        print("Test \"" .. testname .. "\" failed!")
+        failed = failed + 1 
     else
         print("Test \"" .. testname .. "\" passed!")
     end
@@ -90,3 +93,10 @@ test(
     RustyFmt { "table: {{ {3} = {1}, {} = {putsMyMindAtEase} }}", "\"This is absurd\"", "bestNumber", "currentlyThinking", putsMyMindAtEase = 4736251 },
     "table: { currentlyThinking = \"This is absurd\", bestNumber = 4736251 }"
 )
+
+if failed == 0 then
+    print("\nAll tests passed!")
+else
+    print("\n" .. failed .. " tests did not pass!")
+end
+os.exit(failed)
