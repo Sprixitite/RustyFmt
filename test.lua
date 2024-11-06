@@ -6,7 +6,7 @@ end
 
 local function failTestErr() end
 
-local RustyFmt = require("rustyFmt"):WithConfig{ error = testErr }
+local RustyFmt = require("src.rustyFmt"):WithConfig{ error = testErr }
 local FailTestRustyFmt = RustyFmt:WithConfig{ error = failTestErr }
 
 local function test(testname, result, expected)
