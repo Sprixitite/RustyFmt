@@ -1,5 +1,5 @@
 # RustyFmt
-A zero-dependency rust-esque formatter for strings, written fully in Lua 5.1  
+A zero-dependency rust-esque formatter for strings.  
 Tested to be compatible with Lua 5.1 through 5.4
 
 # Examples
